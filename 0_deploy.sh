@@ -77,6 +77,10 @@ listener "tcp" {
   #tls_key_file  = "/path/to/privkey.pem"
   #tls_min_version = tls12
 }
+storage "file" {
+  path  = "/var/lib/vault/data"
+}
+api_addr  = "http://0.0.0.0:8200"
 EOF'
 
 sudo ufw allow 8200/tcp
