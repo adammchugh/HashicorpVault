@@ -68,14 +68,14 @@ sudo chmod 640 /etc/vault.d/vault.hcl
 sudo openssl req -new -newkey rsa:4096 -x509 -sha512 -days 365 -nodes -out /etc/vault/keys/vault.crt -keyout /etc/vault/keys/vault.key
 sudo chmod 400 /etc/vault/keys/vault.key
 
-sudo cat > /etc/vault.d/vault.hcl <<EOF
+sudo bash -c 'cat > /etc/vault.d/vault.hcl <<EOF
 ui = true
 listener "tcp" {
   address       = "0.0.0.0:8200"
   #tls_cert_file = "/path/to/fullchain.pem"
   #tls_key_file  = "/path/to/privkey.pem"
 }
-EOF
+EOF'
 
 sudo ufw allow 8200/tcp
 
