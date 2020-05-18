@@ -7,6 +7,8 @@ sudo apt install unzip -y
 # sudo ufw allow 8200/tcp
 
 export VAULT_ADDR='http://127.0.0.1:8200'
+echo "VAULT_ADDR='http://127.0.0.1:8200'" > ~/.bashrc
+
 export VAULT_URL="https://releases.hashicorp.com/vault" 
 export VAULT_VERSION="1.3.2"
 
