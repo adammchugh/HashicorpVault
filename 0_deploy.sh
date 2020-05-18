@@ -3,7 +3,8 @@
 sudo apt update -y && sudo apt upgrade -y
 sudo apt install unzip -y
 
-sudo ufw enable
+# sudo ufw enable
+# sudo ufw allow 8200/tcp
 
 export VAULT_URL="https://releases.hashicorp.com/vault" VAULT_VERSION="1.3.2"
 curl --silent --remote-name "${VAULT_URL}/${VAULT_VERSION}/vault_${VAULT_VERSION}_linux_amd64.zip"
@@ -82,8 +83,6 @@ storage "file" {
 }
 api_addr  = "http://0.0.0.0:8200"
 EOF'
-
-sudo ufw allow 8200/tcp
 
 sudo systemctl enable vault
 sudo systemctl start vault
