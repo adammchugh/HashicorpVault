@@ -6,7 +6,10 @@ sudo apt install unzip -y
 # sudo ufw enable
 # sudo ufw allow 8200/tcp
 
-export VAULT_URL="https://releases.hashicorp.com/vault" VAULT_VERSION="1.3.2"
+export VAULT_ADDR='http://127.0.0.1:8200'
+export VAULT_URL="https://releases.hashicorp.com/vault" 
+export VAULT_VERSION="1.3.2"
+
 curl --silent --remote-name "${VAULT_URL}/${VAULT_VERSION}/vault_${VAULT_VERSION}_linux_amd64.zip"
 curl --silent --remote-name "${VAULT_URL}/vault/${VAULT_VERSION}/vault_${VAULT_VERSION}_SHA256SUMS"
 curl --silent --remote-name "${VAULT_URL}/${VAULT_VERSION}/${VAULT_VERSION}/vault_${VAULT_VERSION}_SHA256SUMS.sig"
@@ -87,10 +90,10 @@ EOF'
 sudo mkdir --parent /var/lib/vault
 sudo chown vault:vault /var/lib/vault
 
-export VAULT_ADDR='http://127.0.0.1:8200'
-
 sudo systemctl enable vault
 sudo systemctl start vault
+sleep 5
+
 sudo systemctl status vault
 
 vault operator init > ~/vault_init.log
@@ -101,8 +104,6 @@ VAULT_KEY_2=$(cat ~/vault_init.log | grep -o -P '(?<=Key 2: ).*(?=)')
 VAULT_KEY_3=$(cat ~/vault_init.log | grep -o -P '(?<=Key 3: ).*(?=)')
 VAULT_KEY_4=$(cat ~/vault_init.log | grep -o -P '(?<=Key 4: ).*(?=)')
 VAULT_KEY_5=$(cat ~/vault_init.log | grep -o -P '(?<=Key 5: ).*(?=)')
-
-export VAULT_DEV_ROOT_TOKEN_ID="${VAULT_ROOT_TOKEN}"
 
 vault operator unseal ${VAULT_KEY_1}
 vault operator unseal ${VAULT_KEY_3}
