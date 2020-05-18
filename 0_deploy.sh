@@ -22,8 +22,6 @@ sudo setcap cap_ipc_lock=+ep /usr/local/bin/vault
 
 sudo useradd --system --home /etc/vault.d --shell /bin/false vault
 
-sudo touch /etc/systemd/system/vault.service
-
 sudo cat > /etc/systemd/system/vault.service <<EOF
 [Unit]
 Description="HashiCorp Vault - A tool for managing secrets"
