@@ -107,6 +107,10 @@ VAULT_KEY_3=$(cat ~/vault_init.log | grep -o -P '(?<=Key 3: ).*(?=)')
 VAULT_KEY_4=$(cat ~/vault_init.log | grep -o -P '(?<=Key 4: ).*(?=)')
 VAULT_KEY_5=$(cat ~/vault_init.log | grep -o -P '(?<=Key 5: ).*(?=)')
 
+export VAULT_TOKEN='${VAULT_ROOT_TOKEN}'
+echo "VAULT_TOKEN='${VAULT_ROOT_TOKEN}'" > ~/.bashrc
+
 vault operator unseal ${VAULT_KEY_1}
 vault operator unseal ${VAULT_KEY_3}
 vault operator unseal ${VAULT_KEY_5}
+
