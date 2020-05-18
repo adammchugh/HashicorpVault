@@ -71,7 +71,7 @@ sudo chmod 400 /etc/vault/keys/vault.key
 sudo bash -c 'cat > /etc/vault.d/vault.hcl <<EOF
 ui = true
 listener "tcp" {
-  address       = "0.0.0.0:8200"
+  address       = "127.0.0.1:8200"
   #tls_cert_file = "/path/to/fullchain.pem"
   #tls_key_file  = "/path/to/privkey.pem"
 }
