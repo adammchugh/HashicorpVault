@@ -22,7 +22,7 @@ sudo setcap cap_ipc_lock=+ep /usr/local/bin/vault
 
 sudo useradd --system --home /etc/vault.d --shell /bin/false vault
 
-sudo cat > /etc/systemd/system/vault.service <<EOF
+sudo bash -c 'cat > /etc/systemd/system/vault.service <<EOF
 [Unit]
 Description="HashiCorp Vault - A tool for managing secrets"
 Documentation=https://www.vaultproject.io/docs/
@@ -59,7 +59,7 @@ LimitMEMLOCK=infinity
 
 [Install]
 WantedBy=multi-user.target
-EOF
+EOF'
 
 sudo mkdir --parents /etc/vault/keys
 sudo mkdir --parents /etc/vault.d
