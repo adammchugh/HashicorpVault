@@ -114,3 +114,10 @@ vault operator unseal ${VAULT_KEY_1}
 vault operator unseal ${VAULT_KEY_3}
 vault operator unseal ${VAULT_KEY_5}
 
+sleep 5
+
+VAULT_TIMED_TOKEN=$(vault token create -period=30m | grep -o -P '(?<=token ).*(?=)' | sed -e 's/^[ \t]*//')
+echo "Timed token ${VAULT_TIMED_TOKEN} generated. Valid for 30 minutes."
+
+vault login token=${VAULT_TIMED_TOKEN}
+vault auth enable userpass
