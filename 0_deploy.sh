@@ -84,10 +84,26 @@ storage "file" {
 api_addr  = "http://127.0.0.1:8200"
 EOF'
 
+sudo mkdir --parent /var/lib/vault
+sudo chown vault:vault /var/lib/vault
+
 export VAULT_ADDR='http://127.0.0.1:8200'
 
 sudo systemctl enable vault
 sudo systemctl start vault
 sudo systemctl status vault
 
-vault audit enable
+vault operator init > ~/vault_init.log
+
+VAULT_ROOT_TOKEN=$(cat ~/vault_init.log | grep -o -P '(?<=Token: ).*(?=)')
+VAULT_KEY_1=$(cat ~/vault_init.log | grep -o -P '(?<=Key 1: ).*(?=)')
+VAULT_KEY_2=$(cat ~/vault_init.log | grep -o -P '(?<=Key 2: ).*(?=)')
+VAULT_KEY_3=$(cat ~/vault_init.log | grep -o -P '(?<=Key 3: ).*(?=)')
+VAULT_KEY_4=$(cat ~/vault_init.log | grep -o -P '(?<=Key 4: ).*(?=)')
+VAULT_KEY_5=$(cat ~/vault_init.log | grep -o -P '(?<=Key 5: ).*(?=)')
+
+export VAULT_DEV_ROOT_TOKEN_ID="${VAULT_ROOT_TOKEN}"
+
+vault operator unseal ${VAULT_KEY_1}
+vault operator unseal ${VAULT_KEY_3}
+vault operator unseal ${VAULT_KEY_5}
