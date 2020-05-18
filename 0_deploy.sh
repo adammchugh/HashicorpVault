@@ -1,4 +1,9 @@
 #!/bin/sh
+
+sudo apt update -y && sudo apt upgrade -y
+
+sudo ufw enable
+
 export VAULT_URL="https://releases.hashicorp.com/vault" VAULT_VERSION="1.3.2"
 curl --silent --remote-name "${VAULT_URL}/${VAULT_VERSION}/vault_${VAULT_VERSION}_linux_amd64.zip"
 curl --silent --remote-name "${VAULT_URL}/vault/${VAULT_VERSION}/vault_${VAULT_VERSION}_SHA256SUMS"
@@ -74,6 +79,8 @@ listener "tcp" {
   #tls_key_file  = "/path/to/privkey.pem"
 }
 EOF
+
+sudo ufw allow 8200/tcp
 
 sudo systemctl enable vault
 sudo systemctl start vault
