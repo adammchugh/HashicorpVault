@@ -81,9 +81,11 @@ listener "tcp" {
 storage "file" {
   path  = "/var/lib/vault/data"
 }
-api_addr  = "http://0.0.0.0:8200"
+api_addr  = "http://127.0.0.1:8200"
 EOF'
 
 sudo systemctl enable vault
 sudo systemctl start vault
 sudo systemctl status vault
+
+vault audit enable
