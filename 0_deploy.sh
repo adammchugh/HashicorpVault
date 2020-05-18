@@ -84,6 +84,8 @@ storage "file" {
 api_addr  = "http://127.0.0.1:8200"
 EOF'
 
+export VAULT_ADDR='http://127.0.0.1:8200'
+
 sudo systemctl enable vault
 sudo systemctl start vault
 sudo systemctl status vault
