@@ -7,7 +7,7 @@ sudo apt install unzip -y
 # sudo ufw allow 8200/tcp
 
 export VAULT_ADDR='http://127.0.0.1:8200'
-echo "VAULT_ADDR='http://127.0.0.1:8200'" > ~/.bashrc
+echo "VAULT_ADDR='http://127.0.0.1:8200'" >> ~/.bashrc
 
 export VAULT_URL="https://releases.hashicorp.com/vault" 
 export VAULT_VERSION="1.3.2"
@@ -108,7 +108,7 @@ VAULT_KEY_4=$(cat ~/vault_init.log | grep -o -P '(?<=Key 4: ).*(?=)')
 VAULT_KEY_5=$(cat ~/vault_init.log | grep -o -P '(?<=Key 5: ).*(?=)')
 
 export VAULT_TOKEN='${VAULT_ROOT_TOKEN}'
-echo "VAULT_TOKEN='${VAULT_ROOT_TOKEN}'" > ~/.bashrc
+echo "VAULT_TOKEN='${VAULT_ROOT_TOKEN}'" >> ~/.bashrc
 
 vault operator unseal ${VAULT_KEY_1}
 vault operator unseal ${VAULT_KEY_3}
