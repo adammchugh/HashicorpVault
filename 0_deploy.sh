@@ -1,6 +1,7 @@
 #!/bin/sh
 
 sudo apt update -y && sudo apt upgrade -y
+sudo apt install unzip -y
 
 sudo ufw enable
 
@@ -10,8 +11,8 @@ curl --silent --remote-name "${VAULT_URL}/vault/${VAULT_VERSION}/vault_${VAULT_V
 curl --silent --remote-name "${VAULT_URL}/${VAULT_VERSION}/${VAULT_VERSION}/vault_${VAULT_VERSION}_SHA256SUMS.sig"
 
 unzip vault_${VAULT_VERSION}_linux_amd64.zip
-sudo chown root:root vault
 sudo mv vault /usr/local/bin/
+sudo chown root:root /usr/local/bin/vault
 vault --version
 
 vault -autocomplete-install
